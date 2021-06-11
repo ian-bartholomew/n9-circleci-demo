@@ -5,7 +5,12 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - run: "[ -f ./slo.yml ]"
+      - run:
+          name: Check for slo.yml file
+          command: "[ -f ./slo.yml ]"
+      - run:
+          name: Check for service.yml file
+          command: "[ -f ./service.yml ]"
 workflows:
   version: 2
   update_slos:
