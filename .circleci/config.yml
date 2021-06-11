@@ -1,13 +1,13 @@
 version: 2.1
 jobs:
-  build:
+  check_for_files:
     docker:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - run: echo "hello"
+      - run: "[ -f ./slo.yml ]"
 workflows:
   version: 2
   update_slos:
     jobs:
-      - build
+      - check_for_files
