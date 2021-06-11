@@ -1,0 +1,32 @@
+- apiVersion: n9/v1alpha
+  kind: SLO
+  metadata:
+    displayName: '    Front-page-latency-alert-polcy'
+    name: front-page-latency-alert-polcy
+    project: weiner-shirt-zel-front-page
+  spec:
+    alertPolicies:
+    - front-page-latency
+    budgetingMethod: Occurrences
+    description: Latency Alert
+    indicator:
+      metricSource:
+        kind: Agent
+        name: weiner-shirt-zel-latency
+        project: weiner-shirt-zel-latency
+      rawMetric:
+        prometheus:
+          promql: latency_west_c7{code="ALL",instance="localhost:3000",job="prometheus",service="globacount"}
+    objectives:
+    - displayName: Weiner Shirt-zel Front Page
+      op: gt
+      target: 0.99
+      value: 2000
+    service: weiner-shirt-zel-front-page
+    timeWindows:
+    - count: 5
+      isRolling: true
+      period:
+        begin: "2021-06-11T21:17:37Z"
+        end: "2021-06-11T21:22:37Z"
+      unit: Minute
