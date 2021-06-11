@@ -10,7 +10,7 @@ jobs:
           command: "[ -f ./slo.yml ]"
       - run:
           name: Check for service.yml file
-          command: "[ -f ./service.yml ]"
+          command: "[ -f ./services.yml ]"
 workflows:
   version: 2
   update_slos:
