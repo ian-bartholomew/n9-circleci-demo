@@ -25,8 +25,23 @@ jobs:
             wget https://github.com/nobl9/sloctl/releases/download/${SLOCTL_VERSION}/${SLOCTL_FILENAME}
             unzip ${SLOCTL_FILENAME}
       - run:
-          name: Test sloctl
-          command: ./sloctl help
+          name: Create nobl9 config
+          command: |
+            echo "
+            defaultContext = \"default\"
+
+            [Contexts]
+              [Contexts.default]
+                clientId = \"${N9_CLIENT_ID}\"
+                clientSecret = \"${N9_CLIENT_SECRET}\"
+                project = \"weiner-shirt-zel-front-page\"
+            " > ~/.config/nobl9/config.toml
+      - run:
+          name: Update Services
+          command: ./sloctl apply -f services.yml
+      - run:
+          name: Update SLOs
+          command: ./sloctl apply -f slo.yml
 
 workflows:
   version: 2
