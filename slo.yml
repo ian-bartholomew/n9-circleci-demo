@@ -24,9 +24,44 @@
       value: 2000
     service: weiner-shirt-zel-front-page
     timeWindows:
-    - count: 5
+    - count: 60
       isRolling: true
       period:
-        begin: "2021-06-11T21:17:37Z"
-        end: "2021-06-11T21:22:37Z"
+        begin: "2021-06-11T21:47:14Z"
+        end: "2021-06-11T21:52:14Z"
       unit: Minute
+- apiVersion: n9/v1alpha
+  kind: SLO
+  metadata:
+    displayName: Percent complete password reset
+    name: percent-complete-password-reset
+    project: weiner-shirt-zel-front-page
+  spec:
+    alertPolicies: []
+    budgetingMethod: Occurrences
+    description: ""
+    indicator:
+      metricSource:
+        kind: Agent
+        name: weiner-shirt-zel-latency
+        project: weiner-shirt-zel-latency
+    objectives:
+    - countMetrics:
+        good:
+          prometheus:
+            promql: password_reset_complete{code="ALL",instance="localhost:3000",job="prometheus",service="pwr"}
+        incremental: true
+        total:
+          prometheus:
+            promql: password_reset_initiate{code="ALL",instance="localhost:3000",job="prometheus",service="pwr"}
+      displayName: good
+      target: 0.98
+      value: 1
+    service: weiner-shirt-zel-front-page
+    timeWindows:
+    - count: 28
+      isRolling: true
+      period:
+        begin: "2021-05-14T21:52:14Z"
+        end: "2021-06-11T21:52:14Z"
+      unit: Day
