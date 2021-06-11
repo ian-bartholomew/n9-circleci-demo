@@ -27,6 +27,7 @@ jobs:
       - run:
           name: Create nobl9 config
           command: |
+            mkdir -p ~/.config/nobl9
             echo "
             defaultContext = \"default\"
 
