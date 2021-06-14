@@ -27,8 +27,8 @@
     - count: 90
       isRolling: true
       period:
-        begin: "2021-06-11T21:47:14Z"
-        end: "2021-06-11T21:52:14Z"
+        begin: "2021-06-14T21:11:21Z"
+        end: "2021-06-14T22:41:21Z"
       unit: Minute
 - apiVersion: n9/v1alpha
   kind: SLO
@@ -62,6 +62,6 @@
     - count: 28
       isRolling: true
       period:
-        begin: "2021-05-14T21:52:14Z"
-        end: "2021-06-11T21:52:14Z"
+        begin: "2021-05-17T22:41:21Z"
+        end: "2021-06-14T22:41:21Z"
       unit: Day
