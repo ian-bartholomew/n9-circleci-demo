@@ -24,7 +24,7 @@
       value: 2000
     service: weiner-shirt-zel-front-page
     timeWindows:
-    - count: 60
+    - count: 90
       isRolling: true
       period:
         begin: "2021-06-14T21:11:21Z"
