@@ -1,13 +1,24 @@
 version: 2.1
 jobs:
-  build:
+  check_for_files:
     docker:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - run: echo "hello"
+      - run:
+          name: Check for slo.yml file
+          command: |
+            if [ ! -f slo.yml ]; then
+              echo "SLOs file is not present"
+            fi
+      - run:
+          name: Check for services.yml file
+          command: |
+            if [ ! -f services.yml ]; then
+              echo "services file is not present"
+            fi
 workflows:
   version: 2
   update_slos:
     jobs:
-      - build
+      - check_for_files
