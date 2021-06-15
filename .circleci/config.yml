@@ -1,54 +1,13 @@
 version: 2.1
 jobs:
-  check_for_files:
+  build:
     docker:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - run:
-          name: Check for slo.yml file
-          command: "[ -f ./slo.yml ]"
-      - run:
-          name: Check for service.yml file
-          command: "[ -f ./services.yml ]"
-  update_slos:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
-      - run:
-          name: Download sloctl
-          command: |
-            SLOCTL_VERSION=0.0.52
-            SLOCTL_FILENAME="sloctl-linux-${SLOCTL_VERSION}.zip"
-
-            wget https://github.com/nobl9/sloctl/releases/download/${SLOCTL_VERSION}/${SLOCTL_FILENAME}
-            unzip ${SLOCTL_FILENAME}
-      - run:
-          name: Create nobl9 config
-          command: |
-            mkdir -p ~/.config/nobl9
-            echo "
-            defaultContext = \"default\"
-
-            [Contexts]
-              [Contexts.default]
-                clientId = \"${N9_CLIENT_ID}\"
-                clientSecret = \"${N9_CLIENT_SECRET}\"
-                project = \"weiner-shirt-zel-front-page\"
-            " > ~/.config/nobl9/config.toml
-      - run:
-          name: Update Services
-          command: ./sloctl apply -f services.yml
-      - run:
-          name: Update SLOs
-          command: ./sloctl apply -f slo.yml
-
+      - run: echo "hello"
 workflows:
   version: 2
   update_slos:
     jobs:
-      - check_for_files
-      - update_slos:
-          requires:
-            - check_for_files
+      - build
